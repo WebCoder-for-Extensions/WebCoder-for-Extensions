@@ -59,6 +59,7 @@
      * 
      * // messageId: for communication control
      * // instanceId: for each editor page
+     * // connectionId: for each background connection
      * // access_token: for userscript manager to check whether the external request can be accepted
      * 
      * // file path characters:
@@ -74,6 +75,7 @@
      * method: string = "userscripts"
      * action: string = "options"
      * messageId: string
+     * connectionId: string
      * instanceId: string
      * activeUrls: Array<string> = [targetURL]
      * 
@@ -93,6 +95,7 @@
      * method: string = "userscripts"
      * action: string = "list"
      * messageId: string
+     * connectionId: string
      * instanceId: string
      * access_token: string
      * 
@@ -119,6 +122,7 @@
      * method: string = "userscripts"
      * action: string = "list"
      * messageId: string
+     * connectionId: string
      * instanceId: string
      * access_token: string
      * 
@@ -144,6 +148,7 @@
      * path: string                 // path for file of any type
      * ifNotModifiedSince: number   // to ensure the file is not modified by outside
      * messageId: string
+     * connectionId: string
      * instanceId: string
      * access_token: string
      * 
@@ -164,6 +169,7 @@
      * value: code                  // file content sent to external for updating
      * lastModified: number         // to ensure the file is not modified by outside
      * messageId: string
+     * connectionId: string
      * instanceId: string
      * access_token: string
      * 

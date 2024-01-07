@@ -1369,7 +1369,7 @@
                 if (!name || !unders || !path) continue;
 
                 let folderLayers = unders.map(folder => {
-                    fe2(`${folder}` || "undefined")
+                    return fe2(`${folder}` || "undefined")
                 });
 
                 const fileName = fe2(name);
