@@ -1,0 +1,37 @@
+{
+   "action": {
+      "default_icon": {
+         "16": "images/icon16.png",
+         "24": "images/icon24.png",
+         "32": "images/icon32.png"
+      },
+      "default_title": "WebCoder for Extensions"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "description": "Use vscode.dev to edit your userscripts and userstyles locally stored in extensions",
+   "host_permissions": [
+      "https://*.vscode.dev/*"
+   ],
+   "icons": {
+      "128": "images/icon128.png",
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+   },
+   "manifest_version": 3,
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+   },
+   "minimum_chrome_version": "102.0.0.0",
+   "name": "WebCoder for Extensions",
+   "offline_enabled": true,
+   "permissions": [
+      "tabs",
+      "webNavigation",
+      "scripting",
+      "management"
+   ],
+   "short_name": "WebCoder for Extensions",
+   "version": "1.0.1"
+}
