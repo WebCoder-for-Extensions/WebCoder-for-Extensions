@@ -2384,16 +2384,16 @@
 
             }).concat([
                 {
-                    folderName: fsFolderName("Tampermonkey (t)"),
-                    folderHandler: _vfsEntries2,
+                    folderName: fsFolderName("Sample Folder 1 <DEMO>"),
+                    folderHandler: _vfsEntries2.length > 2 ? _vfsEntries2.slice(0, 2) : [],
                 },
                 {
-                    folderName: fsFolderName("Violentmonkey (t)"),
-                    folderHandler: [],
+                    folderName: fsFolderName("Sample Folder 2 <DEMO>"),
+                    folderHandler: _vfsEntries2.length > 3 ? [_vfsEntries2[3]] : [],
                 },
                 {
-                    folderName: fsFolderName("Sample Plugin (t)"),
-                    folderHandler: _vfsEntries2,
+                    folderName: fsFolderName("Sample Folder 3 <DEMO>"),
+                    folderHandler: _vfsEntries2.length > 5 ? _vfsEntries2.slice(-2) : [],
                 },
             ]);
             obm.dataTransfer399 = vFileDrag.createDataTransfer(obm);
