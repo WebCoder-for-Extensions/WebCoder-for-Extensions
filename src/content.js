@@ -1,5 +1,34 @@
 ((context) => {
     "use strict";
+
+    let isPWA = false;
+    let leave = false;
+
+    if (localStorage['webcoder_start_url']) {
+        let displayMode = 'browser';
+        const mqStandAlone = '(display-mode: standalone)';
+        if (navigator.standalone || window.matchMedia(mqStandAlone).matches) {
+            displayMode = 'standalone';
+        }
+        if (displayMode === 'standalone') isPWA = true;
+    }
+    if (isPWA) {
+
+    } else if (location.href.startsWith("https://vscode.dev/?connectTo=userjs")) {
+        sessionStorage.setItem('webcoder_launch_2p69x', `${performance.timeOrigin}`);
+        history.replaceState(history.state, '', location.href.replace(/\?connectTo=[^?=&]+/, ''))
+
+        // } else if (Date.now() - sessionStorage.getItem('webcoder_launch_2p69x') < 800) {
+    } else if (sessionStorage.getItem('webcoder_launch_2p69x') === `${performance.timeOrigin}`) {
+
+    } else {
+        leave = true;
+    }
+
+
+    // if(leave) return;
+
+
     console.log('content.js');
     const ncw = !window.content_world;
     const { chrome } = context;
@@ -261,7 +290,7 @@
 
     };
 
-    let port = setupPortToBackround();
+    let port = null;
 
     // chrome.runtime.sendMessage({
     //     requestActive: true
@@ -271,6 +300,7 @@
     // })
 
     IC.setMessageListener(((evtDetail, handlerFn) => {
+        if (evtDetail.method === "userscripts" && !port) port = setupPortToBackround();
         let tmpDoNotSendMessage = doNotSendMessage;
         if (evtDetail.method === 'userscripts' && evtDetail?.args?.action === 'try-reconnect') {
             if (runtimeExecutable()) {

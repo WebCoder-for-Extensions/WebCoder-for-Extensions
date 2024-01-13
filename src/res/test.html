@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File System Access API - resolve() Example</title>
+</head>
+<body>
+    <input type="file" id="fileInput">
+    <button id="resolveButton">Resolve Directory</button>
+    <p id="result"></p>
+
+    <script>
+        // Function to handle the resolve button click event
+        async function resolveDirectory() {
+            try {
+                const fileInput = document.getElementById('fileInput');
+                const selectedFiles = fileInput.files;
+
+                if (selectedFiles.length === 0) {
+                    document.getElementById('result').innerText = 'Please select a file or directory.';
+                    return;
+                }
+
+                // Obtain a FileSystemDirectoryHandle for the selected directory
+                const directoryHandle = await window.showDirectoryPicker();
+
+                // Resolve a file or directory within the selected directory
+                const resolvedHandle = await directoryHandle.resolve(selectedFiles[0].name);
+
+                // Display the resolved handle's name
+                document.getElementById('result').innerText = `Resolved: ${resolvedHandle.name}`;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        // Add an event listener to the resolve button
+        const resolveButton = document.getElementById('resolveButton');
+        resolveButton.addEventListener('click', resolveDirectory);
+    </script>
+</body>
+</html>

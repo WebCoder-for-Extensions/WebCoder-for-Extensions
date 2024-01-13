@@ -284,7 +284,7 @@
     const closeAllGateways = (toClear) => {
         if (connectionGateways.size > 0) {
             connectionGateways.forEach(gateway => {
-                console.log('disconnecting', gateway)
+                // console.log('disconnecting', gateway)
                 if (gateway && typeof gateway.disconnect === 'function') {
 
                     // gateway.onDisconnect.addListener(()=>{
@@ -352,15 +352,19 @@
 
     }
 
+
     chrome.webNavigation.onCommitted.addListener(details => {
         const lastError = chrome.runtime.lastError;
         if (lastError && runtimeExecutable()) lastError.valueOf();
         if (details.error || details.frameId > 0 || !(details.tabId > 0) || !details.url || details.parentFrameId >= 0) return;
         const { url: url, tabId: tabId } = details;
         // console.log(311, url, tabId);
-        if (!url.startsWith(targetURL)) return;
-        cidDisconnectAll && (clearTimeout(cidDisconnectAll), (cidDisconnectAll = 0));
-        extInfoPipelineExecution(flushListOfUserScriptMgrsAtNavigationIfNeeded);
+
+        // console.log(details)
+
+
+        // cidDisconnectAll && (clearTimeout(cidDisconnectAll), (cidDisconnectAll = 0));
+        // extInfoPipelineExecution(flushListOfUserScriptMgrsAtNavigationIfNeeded);
 
         chrome.scripting.executeScript({
             files: ["content.js"],
@@ -372,7 +376,7 @@
             world: "ISOLATED"
         });
         chrome.scripting.executeScript({
-            files: ["page.js"],
+            files: ["lib/lz-string.js", "page.js"],
             target: {
                 tabId: tabId,
                 frameIds: [0]
@@ -382,7 +386,7 @@
         });
     }, {
         url: [
-            { hostEquals: 'vscode.dev',  "schemes": ["https"] }
+            { hostEquals: 'vscode.dev', "schemes": ["https"] }
 
         ]
 
